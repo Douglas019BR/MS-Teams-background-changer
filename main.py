@@ -20,6 +20,22 @@ from stream import Video
 config = configparser.ConfigParser()
 config.read("config.yaml")
 
+# =============================================================================
+# If you descomment the following code, the script will remove the virtual
+# camera device and create again, this is useful when you want to stop the script
+# and run it again. So you can skip the step Create Virtual Camera on README.md
+
+# import os
+# # kill any process running on the virtual camera device
+# os.system(f"fuser -k {config['V4L2']['virtualDeviceID']}")
+
+# # Remove and recreate the virtual camera device
+# os.system('sudo modprobe -r v4l2loopback')
+# video_n = config['V4L2']['virtualDeviceID'].split("/dev/video")[-1]
+# os.system(f'sudo modprobe v4l2loopback video_nr={video_n} card_name="Virtual Cam 1" exclusive_caps=1')
+
+# =============================================================================
+
 try:
     
     model_path = config['model']['path']
